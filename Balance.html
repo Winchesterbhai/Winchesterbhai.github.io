@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opening Balance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f3f4f6;
+            padding: 20px;
+        }
+        .card {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        button {
+            background: #16a34a;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="card">
+    <h2>Set Opening Balance</h2>
+
+    <form method="POST">
+        <input type="number" name="bank" placeholder="Opening Bank Balance ₹" required>
+        <input type="number" name="cash" placeholder="Opening Cash Balance ₹" required>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>

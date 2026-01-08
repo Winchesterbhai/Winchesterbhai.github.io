@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            max-width: 420px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+        }
+
+        .expense {
+            display: flex;
+            justify-content: space-between;
+            background: #f9fafb;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        .logout {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: red;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Expense Tracker 💸</h2>
+
+    <!-- BALANCE CARDS -->
+    <div style="display:flex; gap:10px; margin-bottom:20px;">
+        <div style="flex:1; background:#e0f2fe; padding:12px; border-radius:10px;">
+            <div style="font-size:14px;">🏦 Bank</div>
+            <div style="font-size:20px; font-weight:bold;">
+                ₹{{ bank_remaining }}
+            </div>
+        </div>
+
+        <div style="flex:1; background:#ecfdf5; padding:12px; border-radius:10px;">
+            <div style="font-size:14px;">💵 Cash</div>
+            <div style="font-size:20px; font-weight:bold;">
+                ₹{{ cash_remaining }}
+            </div>
+        </div>
+    </div>
+
+    <a href="/balance">➕ Set Opening Balance</a>
+
+    <hr>
+
+    <!-- ADD EXPENSE -->
+    <div style="margin-bottom:20px; padding:15px; background:#f9fafb; border-radius:12px;">
+        <h3 style="margin-top:0;">➕ Add Expense</h3>
+
+        <form method="POST" action="/add">
+            <input type="text" name="name" placeholder="Expense name" required>
+            <input type="number" name="amount" placeholder="Amount ₹" required>
+
+            <select name="mode" required>
+                <option value="bank">Bank</option>
+                <option value="cash">Cash</option>
+            </select>
+
+            <button type="submit">Add Expense</button>
+        </form>
+    </div>
+
+    <!-- EXPENSE LIST -->
+    <h3 style="margin-bottom:10px;">📒 This Month’s Expenses</h3>
+
+    {% for e in expenses %}
+        <div class="expense">
+            <div>
+                <div style="font-weight:500;">{{ e[0] }}</div>
+                <div style="font-size:12px; color:#6b7280;">
+                    {{ e[2]|upper }}
+                </div>
+            </div>
+            <strong>₹{{ e[1] }}</strong>
+        </div>
+    {% endfor %}
+
+    <a class="logout" href="/logout">Logout</a>
+</div>
+
+</body>
+</html>
